@@ -41,15 +41,25 @@ const computerScorePara = document.getElementById("computerScore");
 const rockBtn = document.getElementById("rockbtn");
 const paperBtn = document.getElementById("paperbtn");
 const scissorsBtn = document.getElementById("scissorsbtn");
+const endgameModal = document.getElementById("endgameModal");
+const endgameMsg = document.getElementById("endgameMsg");
+const overlay = document.getElementById("overlay");
+const restartBtn = document.getElementById("restartBtn");
 
 rockBtn.addEventListener("click", () => handleClick("rock"));
 paperBtn.addEventListener("click", () => handleClick("paper"));
 scissorsBtn.addEventListener("click", () => handleClick("scissors"));
+restartBtn.addEventListener("click", restartGame);
+overlay.addEventListener("click", closeEndgameModal);
 
 function handleClick(playerChoice) {
     const computerSelection = getComputerChoice();
     playRound(playerChoice, computerSelection);
     updateScore();
+    if (isGameOver()) {
+        openEndgameModal()
+      setFinalMessage();
+    }
 }
 
 function updateScore() {
@@ -86,6 +96,32 @@ function updateScoreMessage(winner, playerChoice, computerSelection) {
 function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
 }
-  
+
+function openEndgameModal() {
+  endgameModal.classList.add("active");
+  overlay.classList.add("active");
+}
+
+function closeEndgameModal() {
+  endgameModal.classList.remove("active");
+  overlay.classList.remove("active");
+}
+
+function setFinalMessage() {
+  return playerScore > computerScore
+    ? (endgameMsg.textContent = "You won!")
+    : (endgameMsg.textContent = "You lost...");
+}
+
+function restartGame() {
+  playerScore = 0;
+  computerScore = 0;
+  scoreInfo.textContent = "Choose your weapon";
+  scoreMessage.textContent = "First to score 5 points wins the game";
+  playerScorePara.textContent = "Player: 0";
+  computerScorePara.textContent = "Computer: 0";
+  endgameModal.classList.remove("active");
+  overlay.classList.remove("active");
+}
 
 

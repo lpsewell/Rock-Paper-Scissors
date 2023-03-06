@@ -14,12 +14,17 @@
     <button id="paperbtn"><img src='./assets/paperImage.png'/></button>
     <button id="scissorsbtn"><img src='./assets/scissors.png'/></button>
     </div>
-    <div>
+    <div class="scoreboardContainer">
         <h3 id="scoreMessage">First to 5 points wins</h3>
         <h4 id="scoreInfo">Make Your Selection</h4>
         <div id="playerScore">Player: 0</div>
         <div id="computerScore">Computer: 0</div>
     </div>
+     <div class="modal" id="endgameModal">
+      <p class="modal-title" id="endgameMsg"></p>
+      <button class="btn btn-restart" id="restartBtn">Play again</button>
+    </div>
+    <div class="overlay" id="overlay"></div>
     <script src="game.js"></script>
 </body>
 </html>
